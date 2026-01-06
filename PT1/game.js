@@ -107,7 +107,6 @@ const game = {
         if(!this.isPlaying) return;
         this.isPlaying = false;
         this.stopTimer();
-        this.addToHistory(); // Add final question
         this.generateReport(); // Prepare print data
         this.showResult();
     },
@@ -293,6 +292,8 @@ const game = {
     advance() {
         if(this.isPlaying) {
             if (this.questionCount >= this.targetQuestions) {
+                this.addToHistory();
+                this.updateQuestionCounter();
                 this.stop();
                 return;
             }
