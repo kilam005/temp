@@ -1,0 +1,387 @@
+:root {
+    /* Material You Palette */
+    --md-sys-color-primary: #0061a4;
+    --md-sys-color-on-primary: #ffffff;
+    --md-sys-color-primary-container: #d1e4ff;
+    --md-sys-color-on-primary-container: #001d36;
+    --md-sys-color-surface: #fdfcff;
+    --md-sys-color-surface-variant: #e1e2ec;
+    --md-sys-color-on-surface: #1a1c1e;
+    --md-sys-color-on-surface-variant: #44474f;
+    --md-sys-color-outline: #74777f;
+    --md-sys-color-error: #ba1a1a;
+    --md-sys-color-success: #1aa260;
+    
+    --logo-blue: #4285f4;
+    --header-height: 80px;
+    --footer-height: 60px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    font-family: 'Google Sans', sans-serif;
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* --- Header --- */
+header {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    background-color: rgba(253, 252, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 100;
+    border-bottom: 1px solid var(--md-sys-color-surface-variant);
+    flex-shrink: 0;
+}
+
+.logo-container { display: flex; align-items: center; gap: 12px; }
+.logo-boxes { display: flex; gap: 4px; }
+.logo-box {
+    width: 36px; height: 36px;
+    border: 2.5px solid var(--logo-blue);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--logo-blue); font-weight: 700; font-size: 16px;
+}
+.logo-text { font-size: 24px; font-weight: 700; color: var(--logo-blue); letter-spacing: -0.5px; }
+
+.game-controls {
+    display: flex; gap: 12px;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.game-controls.visible { opacity: 1; pointer-events: auto; }
+
+/* Buttons */
+.btn {
+    padding: 0 24px; height: 40px; border-radius: 20px; border: none;
+    font-family: 'Google Sans', sans-serif; font-weight: 500; font-size: 14px;
+    cursor: pointer; transition: all 0.2s;
+}
+.btn-stop { background-color: var(--md-sys-color-error); color: white; }
+
+.btn-begin {
+    font-size: 24px; height: 48px; padding: 0 48px; border-radius: 32px;
+    background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-top: 20px;
+}
+
+.btn-close {
+    font-size: 16px; height: 40px; padding: 0 48px; border-radius: 32px;
+    background-color: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-print {
+    font-size: 16px; height: 40px; padding: 0 48px; border-radius: 32px;
+    background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    margin-right: 15px;
+}
+
+.btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+.seperator {
+    width: 110%;
+    margin: 12px 0 0 0;
+}
+/* Mode Selection Styles */
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.btn-mode {
+    width: 99px;
+    height: 50px;
+    font-size: 16px;
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--md-sys-color-outline);
+    background-color: transparent;
+    color: var(--md-sys-color-on-surface-variant);
+    font-family: 'Google Sans', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-mode.selected {
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-primary);
+    border-color: var(--md-sys-color-primary);
+    font-weight: 700;
+}
+
+.custom-input-container {
+    margin: 10px 0;
+}
+
+#customInput {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--md-sys-color-outline);
+    font-size: 16px;
+    width: 100px;
+    text-align: center;
+    font-family: 'Google Sans', sans-serif;
+}
+
+/* --- Main Layout --- */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: row; /* Side by Side */
+    overflow: hidden;
+    position: relative;
+}
+
+/* Center Game Area */
+.game-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex-direction: column;
+}
+
+.hint-text {
+    position: absolute; bottom: -40px; 
+    color: #74777f; font-size: 14px; text-align: center;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 350px;
+    background-color: #f0f4f8;
+    border-left: 1px solid var(--md-sys-color-surface-variant);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 0;
+    flex-shrink: 0;
+}
+
+.sidebar-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--md-sys-color-primary);
+    padding: 20px;
+    background-color: #f0f4f8;
+    z-index: 10;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    flex-shrink: 0;
+}
+
+#historyList {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px 20px 20px 20px;
+    scroll-behavior: smooth;
+}
+
+/* History Card */
+.history-card {
+    background: white;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.history-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13px;
+}
+
+.h-q-num { font-weight: 700; color: var(--md-sys-color-outline); font-size: 11px; text-transform: uppercase; }
+.h-asked { color: var(--md-sys-color-on-surface-variant); }
+.h-answer { color: var(--md-sys-color-primary); font-weight: 700; font-size: 15px; }
+
+/* Start Screen */
+.start-screen { 
+    position: absolute; 
+    z-index: 10;
+    background-color: rgba(253, 252, 255, 0.9);
+    padding: 30px;
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+}
+
+/* HUD */
+.hud-top-left {
+    position: absolute; top: 20px; left: 24px;
+    font-size: clamp(16px, 4vw, 24px); font-weight: 500;
+    color: var(--md-sys-color-on-surface-variant); opacity: 0; transition: opacity 0.3s;
+}
+.hud-top-right {
+    position: absolute; top: 20px; right: 24px;
+    font-family: 'Roboto Mono', monospace; font-size: clamp(16px, 4vw, 24px);
+    color: var(--md-sys-color-primary); background: var(--md-sys-color-primary-container);
+    padding: 8px 16px; border-radius: 12px; opacity: 0; transition: opacity 0.3s;
+    font-variant-numeric: tabular-nums; min-width: 140px; text-align: center;
+}
+
+/* --- Element Tiles --- */
+.game-container {
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    display: flex; justify-content: center; flex-direction: column; align-items: center;
+}
+
+/* Main Big Tile */
+.element-tile {
+    width: clamp(280px, 50vmin, 450px);
+    height: clamp(280px, 50vmin, 450px);
+    background-color: var(--md-sys-color-surface);
+    border: 2px solid var(--md-sys-color-outline);
+    border-radius: 24px;
+    position: relative;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: transform 0.1s;
+}
+
+.element-tile:active, .element-tile.active-anim { transform: scale(0.98); }
+
+/* Mini Tile (for sidebar and print) */
+.mini-tile {
+    width: 70px;
+    height: 70px;
+    background-color: white;
+    border: 1px solid var(--md-sys-color-outline);
+    border-radius: 8px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Scale down content for mini tile */
+.mini-tile .tile-corner { font-size: 8px; padding: 4px; }
+.mini-tile .tile-symbol { font-size: 24px; margin-bottom: 2px; }
+.mini-tile .tile-name { font-size: 9px; margin: 0 0px -4px 0; } 
+.mini-tile .tile-chip { display:none; } 
+.mini-tile .question-mark { color: var(--md-sys-color-error); font-weight: bold;}
+
+/* Content Styling */
+.tile-corner { position: absolute; font-size: clamp(20px, 5vmin, 32px); color: var(--md-sys-color-on-surface-variant); font-weight: 500; padding: 16px; }
+.tile-corner.top-left { top: 0; left: 0; }
+.tile-corner.top-right { top: 0; right: 0; }
+.tile-symbol { position: absolute; font-size: clamp(60px, 15vmin, 120px); font-weight: 700; color: var(--md-sys-color-primary); margin-bottom: 8px; }
+.tile-name { position: absolute; font-size: clamp(30px, 7vmin, 40px); font-weight: 500; margin-bottom: 16px; bottom: 10px; text-align: center; }
+.tile-chip { position: absolute; bottom: -100px; background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant); padding: 8px 16px; border-radius: 16px; font-size: clamp(28px, 6.5vmin, 32px); font-weight: 500; }
+.question-mark { color: var(--md-sys-color-error); font-weight: bold; }
+
+/* Footer */
+footer {
+    height: var(--footer-height); display: flex; align-items: center; justify-content: center;
+    background-color: var(--md-sys-color-surface-variant); color: var(--md-sys-color-on-surface-variant);
+    font-size: 14px; flex-shrink: 0; z-index: 101;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center;
+    z-index: 200; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.modal {
+    background: var(--md-sys-color-surface); padding: 32px; border-radius: 24px;
+    width: 90%; max-width: 60vw; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+.modal h2 { color: var(--md-sys-color-primary); margin-bottom: 24px; }
+.stat-row {
+    display: flex; justify-content: space-between; margin-bottom: 16px; font-size: 18px;
+    border-bottom: 1px solid var(--md-sys-color-surface-variant); padding-bottom: 8px;
+}
+.modal-actions { margin-top: 32px; display: flex; justify-content: center; }
+
+/* Print Area (Hidden by Default) */
+#printArea { display: none; }
+
+/* Responsive Mobile */
+@media (max-width: 800px) {
+    main { flex-direction: column; }
+    .sidebar { width: 100%; height: 200px; border-left: none; border-top: 1px solid var(--md-sys-color-surface-variant); }
+    .game-wrapper { flex: 1; min-height: 400px; }
+    .logo-text { font-size: 18px; }
+    .logo-box { width: 28px; height: 28px; font-size: 12px; }
+    header { padding: 0 16px; }
+}
+
+/* --- PRINT MEDIA QUERY --- */
+@media print {
+    /* Hide ALL screen UI */
+    header, main, footer, .modal-overlay, .game-wrapper, .sidebar, .start-screen {
+        display: none !important;
+    }
+
+    /* Show Print Area */
+    #printArea {
+        display: block !important;
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%;
+        font-family: 'Google Sans', sans-serif;
+        color: #000;
+        background: white;
+        padding: 20px;
+    }
+
+    /* Print Styles */
+    .print-header { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #0061a4; padding-bottom: 20px; }
+    .print-stats { display: flex; justify-content: space-around; margin-bottom: 30px; font-size: 18px; }
+    .p-stat span:first-child { font-weight: bold; color: #555; }
+    
+    .print-table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
+    .print-table th, .print-table td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: middle; font-size: 12px;}
+    .print-table th { background-color: #f0f4f8; color: #0061a4; }
+    
+    /* Ensure mini-tile renders correctly in print */
+    .mini-tile { 
+        border: 1px solid #000 !important; 
+        -webkit-print-color-adjust: exact; 
+        print-color-adjust: exact; 
+    }
+    
+    .print-footer { text-align: center; font-size: 12px; color: #888; border-top: 1px solid #eee; padding-top: 10px; }
+}

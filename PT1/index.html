@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElementMaster - Science Game</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Sticky Header -->
+    <header>
+        <div class="logo-container">
+            <div class="logo-boxes">
+                <div class="logo-box">H</div>
+                <div class="logo-box">He</div>
+            </div>
+            <div class="logo-text">Element Master</div>
+        </div>
+        <div class="game-controls" id="gameControls">
+            <button class="btn btn-stop" id="btnStop">STOP</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Game Area (Left/Center) -->
+        <div class="game-wrapper" id="mainArea">
+            <div class="hud-top-left" id="questionCounter">Question 0</div>
+            <div class="hud-top-right" id="timer">00:00:00</div>
+
+            <!-- Start Screen Overlay -->
+            <div class="start-screen" id="startScreen">
+                <h2 style="color: var(--md-sys-color-primary); margin-bottom: 20px;">Select Round Length</h2>
+                
+                <div class="mode-selector">
+                    <button class="btn-mode selected" data-value="25">25</button>
+                    <button class="btn-mode" data-value="50">50</button>
+                    <button class="btn-mode" data-value="100">100</button>
+                    <button class="btn-mode" data-value="custom">Custom</button>
+                    <button class="btn-mode" data-value="endless">Endless</button>
+                </div>
+
+                <div id="customInputContainer" class="custom-input-container" style="display: none;">
+                    <input type="number" id="customInput" placeholder="Qty" min="1" max="500">
+                </div>
+                <hr class="seperator"/>
+                <button class="btn btn-begin" id="btnStart">BEGIN</button>
+            </div>
+
+            <!-- The Big Element Tile -->
+            <div class="game-container" id="gameContainer">
+                <div class="element-tile" id="elementTile">
+                    <!-- Content injected via JS -->
+                </div>
+                <div class="hint-text">
+                    (Tap anywhere or Spacebar for next)
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar (Right/Bottom) -->
+        <aside class="sidebar" id="sidebarMain">
+            <div class="sidebar-title">Round History</div>
+            <div id="historyList">
+                <!-- History cards injected via JS -->
+            </div>
+        </aside>
+    </main>
+
+    <!-- Sticky Footer -->
+    <footer>
+        © 2025 ElementMaster. Made for Kids learning Science!
+    </footer>
+
+    <!-- Result Popup Modal -->
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal">
+            <h2>Game Ended!</h2>
+            <div class="stat-row">
+                <span>Questions:</span>
+                <span id="resultCount">0</span>
+            </div>
+            <div class="stat-row">
+                <span>Time:</span>
+                <span id="resultTime">00:00:00</span>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn btn-print" id="btnPrint">Print Report</button>
+                <button class="btn btn-close" id="btnClose">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Print Area (Visible only in Print Mode) -->
+    <div id="printArea">
+        <div class="print-header">
+            <h2>Element Master Report</h2>
+            <p><strong>Date:</strong> <span id="printDate"></span></p>
+        </div>
+        
+        <div class="print-stats">
+            <div class="p-stat">
+                <span>Total Answered:</span>
+                <span id="printCount">0</span>
+            </div>
+            <div class="p-stat">
+                <span>Time Taken:</span>
+                <span id="printTime">00:00:00</span>
+            </div>
+        </div>
+
+        <table class="print-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Element Tile</th>
+                    <th>Question Asked</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody id="printTableBody">
+                <!-- Rows injected via JS -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Scripts -->
+    <script src="data.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
