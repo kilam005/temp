@@ -1,0 +1,17 @@
+/* 1. Disable the link functionality and default styling */
+.footer__powered a {
+    pointer-events: none; /* Prevents clicking */
+    cursor: default;      /* Removes the pointer cursor */
+    text-decoration: none;/* Removes the underline */
+    color: inherit;       /* Inherits the text color from the paragraph */
+}
+
+/* 2. Hide the original "JetBrains Writerside" text */
+.footer__powered a span.notranslate {
+    display: none;
+}
+
+/* 3. Inject the new "Archon" text */
+.footer__powered a::after {
+    content: "Archon";
+}
